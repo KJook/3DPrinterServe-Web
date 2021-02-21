@@ -147,5 +147,19 @@
         return this.sales.reduce((acc, val) => acc + val.salesInM, 0)
       },
     },
+    beforeCreate () {
+      if (!localStorage.getItem('token')) {
+        this.$router.push('/login/')
+      }
+    },
+    mounted () {
+      this.axios.get('https://cust.club/api/user', {
+        headers: { token: localStorage.getItem('token') },
+      }).then((response) => {
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
   }
 </script>

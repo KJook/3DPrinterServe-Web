@@ -2061,6 +2061,13 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
 
+axios@^0.19.2:
+  version "0.19.2"
+  resolved "https://registry.npm.taobao.org/axios/download/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha1-PqNsXYgY0NX4qKl6bTa4bNwAyyc=
+  dependencies:
+    follow-redirects "1.5.10"
+
 axios@^0.21.1:
   version "0.21.1"
   resolved "https://registry.npm.taobao.org/axios/download/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
@@ -2643,6 +2650,11 @@ chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
+
+"charenc@>= 0.0.1":
+  version "0.0.2"
+  resolved "https://registry.npm.taobao.org/charenc/download/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
+  integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
 
 chartist@^0.11.0:
   version "0.11.4"
@@ -3352,6 +3364,11 @@ cross-spawn@^7.0.0:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+"crypt@>= 0.0.1":
+  version "0.0.2"
+  resolved "https://registry.npm.taobao.org/crypt/download/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
+  integrity sha1-iNf/fsDfuG9xPch7u0LQRNPmxBs=
+
 crypto-browserify@^3.11.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz#396cf9f3137f03e4b8e532c58f698254e00f80ec"
@@ -3577,6 +3594,13 @@ debug@4.1.1, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   dependencies:
     ms "^2.1.1"
+
+debug@=3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  integrity sha1-W7WgZyYotkFJVmuhaBnmFRjGcmE=
+  dependencies:
+    ms "2.0.0"
 
 debug@^3.0.0, debug@^3.1.1, debug@^3.2.5:
   version "3.2.6"
@@ -4771,6 +4795,13 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+follow-redirects@1.5.10:
+  version "1.5.10"
+  resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+  integrity sha1-e3qfmuov3/NnhqlP9kPtB/T/Xio=
+  dependencies:
+    debug "=3.1.0"
 
 follow-redirects@^1.0.0:
   version "1.10.0"
@@ -6110,6 +6141,16 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
+jquery@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
+  integrity sha1-17TQjhv9uGrS8aPQOeoXMEcXq7U=
+
+js-base64@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.npm.taobao.org/js-base64/download/js-base64-3.6.0.tgz?cache=0&sync_timestamp=1604451770449&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjs-base64%2Fdownload%2Fjs-base64-3.6.0.tgz#773e1de628f4f298d65a7e9842c50244751f5756"
+  integrity sha1-dz4d5ij08pjWWn6YQsUCRHUfV1Y=
+
 js-message@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/js-message/-/js-message-1.0.5.tgz#2300d24b1af08e89dd095bc1a4c9c9cfcb892d15"
@@ -6636,10 +6677,34 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
 
+mdclub-sdk-js@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/mdclub-sdk-js/download/mdclub-sdk-js-1.0.5.tgz#b486523bb4021acbc2c624d3ba46285c5d5428d7"
+  integrity sha1-tIZSO7QCGsvCxiTTukYoXF1UKNc=
+  dependencies:
+    axios "^0.19.2"
+    jquery "^3.5.1"
+    mdui.jq "^2.0.0"
+    mithril "^2.0.4"
+    sha-1 "^1.0.0"
+
 mdn-data@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
   integrity sha512-iV3XNKw06j5Q7mi6h+9vbx23Tv7JkjEVgKHW4pimwyDGWm0OIQntJJ+u1C6mg6mK1EaTv42XQ7w76yuzH7M2cA==
+
+mdn-polyfills@^5.20.0:
+  version "5.20.0"
+  resolved "https://registry.npm.taobao.org/mdn-polyfills/download/mdn-polyfills-5.20.0.tgz#ca8247edf20a4f60dec6804372229812b348260b"
+  integrity sha1-yoJH7fIKT2DexoBDciKYErNIJgs=
+
+mdui.jq@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/mdui.jq/download/mdui.jq-2.0.1.tgz#8c7ce143680ea2a8fa7511675dd0eca6fa57c1d5"
+  integrity sha1-jHzhQ2gOoqj6dRFnXdDspvpXwdU=
+  dependencies:
+    mdn-polyfills "^5.20.0"
+    promise-polyfill "^8.2.0"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -6919,6 +6984,11 @@ mississippi@^3.0.0:
     pumpify "^1.3.3"
     stream-each "^1.1.0"
     through2 "^2.0.0"
+
+mithril@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npm.taobao.org/mithril/download/mithril-2.0.4.tgz#d125969d992b924c7185d24ff92d997e5c00116b"
+  integrity sha1-0SWWnZkrkkxxhdJP+S2ZflwAEWs=
 
 mixin-deep@^1.2.0:
   version "1.3.2"
@@ -8224,6 +8294,11 @@ promise-inflight@^1.0.1:
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
 
+promise-polyfill@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npm.taobao.org/promise-polyfill/download/promise-polyfill-8.2.0.tgz#367394726da7561457aba2133c9ceefbd6267da0"
+  integrity sha1-NnOUcm2nVhRXq6ITPJzu+9YmfaA=
+
 protocols@^1.1.0, protocols@^1.4.0:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/protocols/-/protocols-1.4.7.tgz#95f788a4f0e979b291ffefcf5636ad113d037d32"
@@ -9066,6 +9141,11 @@ setprototypeof@1.1.1:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
 
+sha-1@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/sha-1/download/sha-1-1.0.0.tgz#01cca4f6ba3e5cacd44dbde092c90d070660e4e2"
+  integrity sha1-Acyk9ro+XKzUTb3gkskNBwZg5OI=
+
 sha.js@^2.4.0, sha.js@^2.4.8:
   version "2.4.11"
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.4.11.tgz#37a5cf0b81ecbc6943de109ba2960d1b26584ae7"
@@ -9073,6 +9153,14 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+sha1@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/sha1/download/sha1-1.1.1.tgz#addaa7a93168f393f19eb2b15091618e2700f848"
+  integrity sha1-rdqnqTFo85PxnrKxUJFhjicA+Eg=
+  dependencies:
+    charenc ">= 0.0.1"
+    crypt ">= 0.0.1"
 
 shallow-clone@^3.0.0:
   version "3.0.1"

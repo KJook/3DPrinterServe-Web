@@ -20,56 +20,20 @@
           <v-form>
             <v-container class="py-0">
               <v-row>
-
                 <v-col cols="12">
                   <v-text-field
                     color="purple"
                     label="为要打印的物品取一个名字吧"
                   />
                 </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    color="purple"
-                    label="City"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    color="purple"
-                    label="Country"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    color="purple"
-                    label="Postal Code"
-                    type="number"
-                  />
-                </v-col>
-
-
-
                 <v-col cols="6">
                   <v-overflow-btn
                     dense
                     :items="color"
                     label="选择颜色"
                     item-value="text"
-                  ></v-overflow-btn>
+                  />
                 </v-col>
-
                 <v-col
                   cols="6"
                 >
@@ -80,7 +44,6 @@
                     value="1"
                   />
                 </v-col>
-
                 <v-col cols="12">
                   <v-textarea
                     color="purple"
@@ -96,7 +59,7 @@
                     color="primary"
                     min-width="150"
                   >
-                    Update Profile
+                    提交订单
                   </v-btn>
                 </v-col>
               </v-row>
@@ -110,7 +73,6 @@
         md="4"
       >
         <app-card class="mt-4 text-center">
-
           <v-card-text class="text-center">
             <h6 class="text-h6 mb-2 text--secondary">
               3d预览框
@@ -123,14 +85,13 @@
               :src="stlUrl"
               :rotation="rotation"
               @on-load="onLoad"
-            ></model-stl>
+            />
           </v-col>
           <v-file-input
             label="点击上传你的3d-STL文件"
-            outlined
+            outslined
             dense
-          ></v-file-input>
-
+          />
         </app-card>
       </v-col>
     </v-row>
@@ -141,6 +102,9 @@
   import { ModelStl } from 'vue-3d-model'
   export default {
     name: 'OrderView',
+    components: {
+      ModelStl,
+    },
     data: () => ({
       rotation: {
         x: -Math.PI / 2,
@@ -158,15 +122,12 @@
     }),
     methods: {
       onLoad () {
-        this.rotate();
+        this.rotate()
       },
       rotate () {
-        this.rotation.z += 0.01;
-        requestAnimationFrame( this.rotate );
-      }
-    },
-    components: {
-      ModelStl,
+        this.rotation.z += 0.01
+        requestAnimationFrame(this.rotate)
+      },
     },
   }
 </script>

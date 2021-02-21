@@ -5,298 +5,215 @@
     tag="section"
   >
     <view-intro
-      heading="Login"
-      link="login/l"
+      heading="Sign In"
     />
 
-    <v-row>
-      <v-col cols="12">
-        <material-card
-          color="success"
-          full-header
-        >
-          <template #heading>
-            <div class="pa-6 white--text">
-              <div class="text-h4 font-weight-light">
-                Material Design Icons
-              </div>
-
-              <div class="text-subtitle-1">
-                See all available <a
-                  class="white--text"
-                  href="https://github.com/Templarian/MaterialDesign"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >Icons</a>
-              </div>
-            </div>
-          </template>
+    <material-card
+      icon-small
+      class="mx-auto"
+      max-width="600"
+      icon="mdi-account"
+      title="使用cust.club账号来登录"
+      color="accent"
+    >
+      <v-form
+        ref="form"
+        v-model="valid"
+      >
+        <v-container class="py-0">
           <v-row
-            align="center"
-            justify="center"
+            class="ma-8"
           >
             <v-col
-              v-for="icon in icons"
-              :key="icon"
-              class="ma-2"
-              cols="auto"
+              cols="12"
             >
-              <v-tooltip top>
-                <template v-slot:activator="{ attrs, on }">
-                  <v-icon
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    {{ icon }}
-                  </v-icon>
-                </template>
-                <span>{{ icon }}</span>
-              </v-tooltip>
+              <v-text-field
+                v-model="formValue.email"
+                :rules="[rules.required,]"
+                label="邮箱或用户名"
+                outlined
+              />
+            </v-col>
+            <v-col cols="12">
+              <v-text-field
+                v-model="formValue.password"
+                :error-messages="error.password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showPassword ? 'text' : 'password'"
+                :rules="[rules.required]"
+                label="密码"
+                outlined
+                counter
+                @click:append="showPassword = !showPassword"
+              />
+            </v-col>
+            <v-col
+              v-if="hasPicCode"
+              cols="12"
+              sm="4"
+            >
+              <v-img
+                :src="picSource"
+                @click="refreshCode"
+              >
+              </v-img>
+            </v-col>
+            <v-col
+              v-if="hasPicCode"
+              cols="12"
+              sm="8"
+            >
+              <v-text-field
+                v-model="formValue.code"
+                :error-messages="error.code"
+                :rules="[rules.required,]"
+                refs="code"
+                type="text"
+                label="图形验证码"
+                outlined
+              />
+            </v-col>
+            <v-col
+              class="mb-10 text-center"
+              cols="12"
+            >
+              <v-btn
+                min-width="150"
+                :color="btn.color"
+                :loading="btn.onLoading"
+                :disable="btn.onLoading"
+                @click="login"
+              >
+                提交订单
+              </v-btn>
             </v-col>
           </v-row>
-        </material-card>
-      </v-col>
+        </v-container>
+      </v-form>
+    </material-card>
+    <v-snackbar
+      v-model="snackbar.enable"
+      :timeout="snackbar.timeout"
+    >
+      {{ snackbar.text }}
 
-      <v-col
-        class="mx-auto"
-        cols="auto"
-      >
-        <app-btn
-          href="https://github.com/Templarian/MaterialDesign"
-          large
-          rel="noopener noreferrer"
-          target="_blank"
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
         >
-          <v-icon left>
-            mdi-material-design
-          </v-icon>
-
-          <span>See all icons</span>
-        </app-btn>
-      </v-col>
-    </v-row>
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
+  import sha1 from 'sha1'
   export default {
     name: 'LoginView',
-
     data: () => ({
-      icons: [
-        'mdi-access-point',
-        'mdi-access-point-network',
-        'mdi-account',
-        'mdi-account-alert',
-        'mdi-account-box',
-        'mdi-account-box-multiple',
-        'mdi-account-box-outline',
-        'mdi-account-card-details',
-        'mdi-account-check',
-        'mdi-account-circle',
-        'mdi-account-convert',
-        'mdi-account-edit',
-        'mdi-account-group',
-        'mdi-account-heart',
-        'mdi-account-key',
-        'mdi-account-location',
-        'mdi-account-minus',
-        'mdi-account-multiple',
-        'mdi-account-multiple-check',
-        'mdi-account-multiple-minus',
-        'mdi-account-multiple-outline',
-        'mdi-account-multiple-plus',
-        'mdi-account-multiple-plus-outline',
-        'mdi-account-network',
-        'mdi-account-off',
-        'mdi-account-outline',
-        'mdi-account-plus',
-        'mdi-account-plus-outline',
-        'mdi-account-remove',
-        'mdi-account-search',
-        'mdi-account-search-outline',
-        'mdi-account-settings',
-        'mdi-account-settings-variant',
-        'mdi-account-star',
-        'mdi-account-switch',
-        'mdi-accusoft',
-        'mdi-adjust',
-        'mdi-adobe',
-        'mdi-air-conditioner',
-        'mdi-airballoon',
-        'mdi-airplane',
-        'mdi-airplane-landing',
-        'mdi-airplane-off',
-        'mdi-airplane-takeoff',
-        'mdi-airplay',
-        'mdi-airport',
-        'mdi-alarm',
-        'mdi-alarm-bell',
-        'mdi-alarm-check',
-        'mdi-alarm-light',
-        'mdi-alarm-multiple',
-        'mdi-alarm-off',
-        'mdi-alarm-plus',
-        'mdi-alarm-snooze',
-        'mdi-album',
-        'mdi-alert',
-        'mdi-alert-box',
-        'mdi-alert-circle',
-        'mdi-alert-circle-outline',
-        'mdi-alert-decagram',
-        'mdi-alert-octagon',
-        'mdi-alert-octagram',
-        'mdi-alert-outline',
-        'mdi-alien',
-        'mdi-all-inclusive',
-        'mdi-alpha',
-        'mdi-alphabetical',
-        'mdi-altimeter',
-        'mdi-amazon',
-        'mdi-amazon-alexa',
-        'mdi-amazon-drive',
-        'mdi-ambulance',
-        'mdi-amplifier',
-        'mdi-anchor',
-        'mdi-android',
-        'mdi-android-debug-bridge',
-        'mdi-android-head',
-        'mdi-android-studio',
-        'mdi-angle-acute',
-        'mdi-angle-obtuse',
-        'mdi-angle-right',
-        'mdi-angular',
-        'mdi-angularjs',
-        'mdi-animation',
-        'mdi-animation-play',
-        'mdi-anvil',
-        'mdi-apple',
-        'mdi-apple-finder',
-        'mdi-apple-icloud',
-        'mdi-apple-ios',
-        'mdi-apple-keyboard-caps',
-        'mdi-apple-keyboard-command',
-        'mdi-apple-keyboard-control',
-        'mdi-apple-keyboard-option',
-        'mdi-apple-keyboard-shift',
-        'mdi-apple-safari',
-        'mdi-application',
-        'mdi-approval',
-        'mdi-apps',
-        'mdi-arch',
-        'mdi-archive',
-        'mdi-arrange-bring-forward',
-        'mdi-arrange-bring-to-front',
-        'mdi-arrange-send-backward',
-        'mdi-arrange-send-to-back',
-        'mdi-arrow-all',
-        'mdi-arrow-bottom-left',
-        'mdi-arrow-bottom-left-bold-outline',
-        'mdi-arrow-bottom-left-thick',
-        'mdi-arrow-bottom-right',
-        'mdi-arrow-bottom-right-bold-outline',
-        'mdi-arrow-bottom-right-thick',
-        'mdi-arrow-collapse',
-        'mdi-arrow-collapse-all',
-        'mdi-arrow-collapse-down',
-        'mdi-arrow-collapse-horizontal',
-        'mdi-arrow-collapse-left',
-        'mdi-arrow-collapse-right',
-        'mdi-arrow-collapse-up',
-        'mdi-arrow-collapse-vertical',
-        'mdi-arrow-decision',
-        'mdi-arrow-decision-auto',
-        'mdi-arrow-decision-auto-outline',
-        'mdi-arrow-decision-outline',
-        'mdi-arrow-down',
-        'mdi-arrow-down-bold',
-        'mdi-arrow-down-bold-box',
-        'mdi-arrow-down-bold-box-outline',
-        'mdi-arrow-down-bold-circle',
-        'mdi-arrow-down-bold-circle-outline',
-        'mdi-arrow-down-bold-hexagon-outline',
-        'mdi-arrow-down-bold-outline',
-        'mdi-arrow-down-box',
-        'mdi-arrow-down-drop-circle',
-        'mdi-arrow-down-drop-circle-outline',
-        'mdi-arrow-down-thick',
-        'mdi-arrow-expand',
-        'mdi-arrow-expand-all',
-        'mdi-arrow-expand-down',
-        'mdi-arrow-expand-horizontal',
-        'mdi-arrow-expand-left',
-        'mdi-arrow-expand-right',
-        'mdi-arrow-expand-up',
-        'mdi-arrow-expand-vertical',
-        'mdi-arrow-left',
-        'mdi-arrow-left-bold',
-        'mdi-arrow-left-bold-box',
-        'mdi-arrow-left-bold-box-outline',
-        'mdi-arrow-left-bold-circle',
-        'mdi-arrow-left-bold-circle-outline',
-        'mdi-arrow-left-bold-hexagon-outline',
-        'mdi-arrow-left-bold-outline',
-        'mdi-arrow-left-box',
-        'mdi-arrow-left-drop-circle',
-        'mdi-arrow-left-drop-circle-outline',
-        'mdi-arrow-left-right-bold-outline',
-        'mdi-arrow-left-thick',
-        'mdi-arrow-right',
-        'mdi-arrow-right-bold',
-        'mdi-arrow-right-bold-box',
-        'mdi-arrow-right-bold-box-outline',
-        'mdi-arrow-right-bold-circle',
-        'mdi-arrow-right-bold-circle-outline',
-        'mdi-arrow-right-bold-hexagon-outline',
-        'mdi-arrow-right-bold-outline',
-        'mdi-arrow-right-box',
-        'mdi-arrow-right-drop-circle',
-        'mdi-arrow-right-drop-circle-outline',
-        'mdi-arrow-right-thick',
-        'mdi-arrow-split-horizontal',
-        'mdi-arrow-split-vertical',
-        'mdi-arrow-top-left',
-        'mdi-arrow-top-left-bold-outline',
-        'mdi-arrow-top-left-thick',
-        'mdi-arrow-top-right',
-        'mdi-arrow-top-right-bold-outline',
-        'mdi-arrow-top-right-thick',
-        'mdi-arrow-up',
-        'mdi-arrow-up-bold',
-        'mdi-arrow-up-bold-box',
-        'mdi-arrow-up-bold-box-outline',
-        'mdi-arrow-up-bold-circle',
-        'mdi-arrow-up-bold-circle-outline',
-        'mdi-arrow-up-bold-hexagon-outline',
-        'mdi-arrow-up-bold-outline',
-        'mdi-arrow-up-box',
-        'mdi-arrow-up-down-bold-outline',
-        'mdi-arrow-up-drop-circle',
-        'mdi-arrow-up-drop-circle-outline',
-        'mdi-arrow-up-thick',
-        'mdi-artist',
-        'mdi-assistant',
-        'mdi-asterisk',
-        'mdi-at',
-        'mdi-atlassian',
-        'mdi-atom',
-        'mdi-attachment',
-        'mdi-audio-video',
-        'mdi-audiobook',
-        'mdi-augmented-reality',
-        'mdi-auto-fix',
-        'mdi-auto-upload',
-        'mdi-autorenew',
-        'mdi-av-timer',
-        'mdi-axe',
-        'mdi-azure',
-        'mdi-baby',
-        'mdi-baby-buggy',
-        'mdi-backburger',
-        'mdi-backspace',
-        'mdi-backup-restore',
-        'mdi-badminton',
-      ],
+      btn: {
+        onLoading: false,
+        color: 'accent',
+      },
+      snackbar: {
+        enable: false,
+        text: '网络出错啦',
+        timeout: 2000,
+      },
+      valid: true,
+      hasPicCode: false,
+      picSource: '',
+      picToken: '',
+      formValue: {
+        email: '',
+        password: '',
+        code: '',
+      },
+      error: {
+        password: '',
+        code: '',
+      },
+      rules: {
+        required: value => !!value || 'Required.',
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(value) || 'Invalid e-mail.'
+        },
+        counter: value => value.length <= 20 || 'Max 20 characters',
+        min: value => value.length >= 8 || 'At least 20 characters',
+      },
+      showPassword: false,
     }),
+    methods: {
+      login () {
+        if (!this.$refs.form.validate()) {
+          this.$refs.form.resetValidation()
+          return
+        }
+        this.btn.onLoading = true
+        const data = {
+          name: this.formValue.email,
+          password: sha1(this.formValue.password),
+        }
+        if (this.hasPicCode) {
+          data.captcha_token = this.picToken
+          data.captcha_code = this.formValue.code
+        }
+        this.axios.post('https://cust.club/api/tokens', data)
+          .then((response) => {
+            console.log(response)
+            const data = response.data
+            if (data.code === 200001) {
+              const errors = data.errors
+              if (Object.prototype.hasOwnProperty.call(errors, 'captcha_code')) {
+                this.error.code = errors.captcha_code
+                this.formValue.code = ''
+              } else {
+                this.error.code = ''
+              }
+
+              if (Object.prototype.hasOwnProperty.call(errors, 'password')) {
+                this.error.password = errors.password
+                this.formValue.password = ''
+              } else {
+                this.error.code = ''
+              }
+            } else if (data.code === 0) {
+              localStorage.setItem('token', data.data.token)
+              this.$router.push('/')
+            }
+            if (Object.prototype.hasOwnProperty.call(data, 'captcha_image')) {
+              this.picSource = data.captcha_image
+              this.picToken = data.captcha_token
+              this.hasPicCode = true
+            }
+            this.btn.onLoading = false
+          })
+          .catch((error) => {
+            this.btn.onLoading = false
+            this.snackbar.enable = true
+            console.log(error)
+          })
+      },
+      refreshCode () {
+        this.axios.post('https://cust.club/api/captchas')
+          .then((response) => {
+            const data = response.data
+            if (data.code === 0) {
+              this.picSource = data.data.captcha_image
+              this.picToken = data.data.captcha_token
+              this.hasPicCode = true
+            }
+          }).catch((error) => {
+            console.log(error)
+            this.snackbar.enable = true
+          })
+      },
+    },
   }
 </script>

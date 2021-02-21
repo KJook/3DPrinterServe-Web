@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    v-if="isShow"
     bottom
     left
     min-width="200"
@@ -24,19 +25,12 @@
       flat
       nav
     >
-      <template v-for="(p, i) in profile">
-        <v-divider
-          v-if="p.divider"
-          :key="`divider-${i}`"
-          class="mb-2 mt-2"
-        />
-
-        <app-bar-item
-          v-else
-          :key="`item-${i}`"
-          to="/"
-        >
-          <v-list-item-title v-text="p.title" />
+      <template>
+        <app-bar-item>
+          <v-list-item-title
+            @click="logOut"
+            v-text="profile.title"
+          />
         </app-bar-item>
       </template>
     </v-list>
@@ -46,14 +40,15 @@
 <script>
   export default {
     name: 'DefaultAccount',
-
     data: () => ({
-      profile: [
-        { title: 'Profile' },
-        { title: 'Settings' },
-        { divider: true },
-        { title: 'Log out' },
-      ],
+      profile: { title: 'Log out' },
     }),
+    methods: {
+      logOut () {
+        console.log('ok')
+        localStorage.removeItem('token')
+        this.$router.push('/login/')
+      },
+    },
   }
 </script>

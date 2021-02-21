@@ -37,6 +37,8 @@ const router = new Router({
       route('Google Maps', null, 'maps/google'),
       // Login
       route('Login', null, 'login'),
+      route('SignUp', null, 'signup'),
+      route('SignUpOk', null, '/signupok/:e/'),
     ]),
   ],
 })

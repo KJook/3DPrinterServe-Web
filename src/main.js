@@ -6,9 +6,10 @@ import './plugins'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 import axios from 'axios'
-Vue.prototype.$axios = axios
+import VueAxios from 'vue-axios'
 
-Vue.config.productionTip = false
+Vue.use(VueAxios, axios)
+Vue.config.productionTip = true
 
 sync(store, router)
 
