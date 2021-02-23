@@ -21,29 +21,31 @@ const router = new Router({
   routes: [
     layout('Default', [
       route('Dashboard'),
-
       // Pages
-      route('Order', null, 'order'),
+      route('Order', null, 'order', { requireLogin: true }),
 
       // Components
-      route('Notifications', null, 'components/notifications'),
-      route('Icons', null, 'components/icons'),
-      route('Typography', null, 'components/typography'),
+      route('Notifications', null, 'components/notifications', { requireLogin: false }),
+      route('Icons', null, 'components/icons', { requireLogin: true }),
+      route('Typography', null, 'components/typography', { requireLogin: true }),
 
       // Tables
-      route('Regular Tables', null, 'tables/regular'),
+      route('Profile', null, 'profile', { requireLogin: true }),
 
       // Maps
       route('Google Maps', null, 'maps/google'),
       // Login
-      route('Login', null, 'login'),
-      route('SignUp', null, 'signup'),
-      route('SignUpOk', null, '/signupok/:e/'),
+      route('Login', null, 'login', { requireLogin: false }),
     ]),
   ],
 })
 
 router.beforeEach((to, from, next) => {
+  if (to.meta.requireLogin) {
+    if (!localStorage.getItem('token')) {
+      next({ path: '/login/' })
+    }
+  }
   return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
 })
 

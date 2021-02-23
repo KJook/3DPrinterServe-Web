@@ -1,6 +1,5 @@
 <template>
   <v-menu
-    v-if="isShow"
     bottom
     left
     min-width="200"
@@ -10,13 +9,14 @@
   >
     <template v-slot:activator="{ attrs, on }">
       <v-btn
+        :loading="loading"
         class="ml-2"
         min-width="0"
         text
         v-bind="attrs"
         v-on="on"
       >
-        <v-icon>mdi-account</v-icon>
+        <v-icon>{{ icon }}</v-icon>
       </v-btn>
     </template>
 
@@ -38,16 +38,23 @@
 </template>
 
 <script>
+  import { get, call } from 'vuex-pathify'
+
   export default {
     name: 'DefaultAccount',
     data: () => ({
       profile: { title: 'Log out' },
     }),
+    computed: {
+      icon: get('userinfo/icon'),
+      loading: get('userinfo/loading'),
+    },
+    mounted () {
+      this.updateInfo()
+    },
     methods: {
+      ...call('userinfo/*'),
       logOut () {
-        console.log('ok')
-        localStorage.removeItem('token')
-        this.$router.push('/login/')
       },
     },
   }

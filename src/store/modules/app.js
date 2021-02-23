@@ -18,9 +18,9 @@ const state = {
       to: '/order/',
     },
     {
-      title: 'Regular Tables',
+      title: '我的信息',
       icon: 'mdi-clipboard-outline',
-      to: '/tables/regular/',
+      to: '/profile/',
     },
     {
       title: 'Typography',

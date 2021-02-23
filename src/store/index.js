@@ -17,7 +17,6 @@ const store = new Vuex.Store({
 
 store.subscribe(mutation => {
   if (!mutation.type.startsWith('user/')) return
-
   store.dispatch('user/update', mutation)
 })
 

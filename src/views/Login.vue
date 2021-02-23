@@ -113,6 +113,7 @@
 
 <script>
   import sha1 from 'sha1'
+  import { get, call } from 'vuex-pathify'
   export default {
     name: 'LoginView',
     data: () => ({
@@ -185,6 +186,8 @@
               }
             } else if (data.code === 0) {
               localStorage.setItem('token', data.data.token)
+              console.log('set')
+              this.updateInfo()
               this.$router.push('/')
             }
             if (Object.prototype.hasOwnProperty.call(data, 'captcha_image')) {
@@ -200,6 +203,7 @@
             console.log(error)
           })
       },
+      ...call('userinfo/*'),
       refreshCode () {
         this.axios.post('https://cust.club/api/captchas')
           .then((response) => {
